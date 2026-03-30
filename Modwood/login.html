@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication | Modwood</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .auth-visual {
+            flex: 1.2;
+            background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), url('Assets/hero1.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 80px;
+            color: white;
+            position: relative;
+        }
+
+        .auth-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, transparent, rgba(15, 23, 42, 0.8));
+        }
+
+        .auth-visual-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .auth-content {
+            flex: 1;
+            background: var(--bg-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        @media (max-width: 1024px) {
+            .auth-visual {
+                display: none;
+            }
+        }
+
+        .auth-toggle {
+            display: flex;
+            background: var(--bg-alt);
+            padding: 6px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            border: 1px solid var(--border);
+        }
+
+        .auth-toggle button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .auth-toggle button.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-container {
+            transition: all 0.4s ease;
+        }
+
+        #register-form {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .auth-card.mode-register #login-form {
+            display: none;
+        }
+
+        .auth-card.mode-register #register-form {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <link rel="icon" type="image/png" href="Assets/favicon.png">
+
+    <div class="auth-container">
+        <!-- Visual Side -->
+        <div class="auth-visual">
+            <div class="auth-visual-content">
+                <a href="index.html" class="logo"
+                    style="font-size: 2rem; color: white; display: block; margin-bottom: 40px;">
+                    <i class="fas fa-layer-group"></i> Modwood
+                </a>
+                <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; font-family: var(--font-heading); color: white;">
+                    Crafting Spatial <br>Legacies</h1>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; max-width: 500px; line-height: 1.8;">
+                    Welcome to the atelier. Where architectural precision meets artisan craft. Join our global network
+                    of design visionaries.
+                </p>
+            </div>
+        </div>
+
+        <!-- Form Side -->
+        <div class="auth-content">
+            <div class="auth-card" id="auth-card">
+                <div style="margin-bottom: 30px; text-align: center;">
+                    <div class="auth-toggle">
+                        <button id="toggle-login" class="active">Sign In</button>
+                        <button id="toggle-register">Create Account</button>
+                    </div>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-form" class="form-container">
+                    <div style="margin-bottom: 30px; text-align: center;">
+                        <h2 style="font-size: 2rem; margin-bottom: 10px; color: var(--text-main);">Welcome Back</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">The archive of luxury awaits your
+                            return.
+                        </p>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label class="label">Email Address</label>
+                            <div style="position: relative;">
+                                <i class="fas fa-envelope"
+                                    style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="email" class="input" style="padding-left: 45px;"
+                                    placeholder="name@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Password</label>
+                            <div style="position: relative;">
+                                <i class="fas fa-lock"
+                                    style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="password" class="input" style="padding-left: 45px;" placeholder="••••••••">
+                            </div>
+                            <div style="text-align: right; margin-top: 8px;">
+                                <a href="#" style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">Forgot
+                                    Password?</a>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="remember">
+                            <label for="remember" style="font-size: 0.9rem; color: var(--text-main);">Keep me signed
+                                in</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; padding: 18px; font-size: 1rem; border-radius: 15px; margin-top: 10px;">Login</button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="form-container">
+                    <div style="margin-bottom: 30px; text-align: center;">
+                        <h2 style="font-size: 2rem; margin-bottom: 10px; color: var(--text-main);">Join the Legacy</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Create your profile to access custom
+                            craftmanship metrics.</p>
+                    </div>
+                    <form>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label class="label">First Name</label>
+                                <input type="text" class="input" placeholder="Alexander">
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Last Name</label>
+                                <input type="text" class="input" placeholder="Moore">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Professional Email</label>
+                            <div style="position: relative;">
+                                <i class="fas fa-envelope"
+                                    style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="email" class="input" style="padding-left: 45px;"
+                                    placeholder="alex@atelier.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Password</label>
+                            <div style="position: relative;">
+                                <i class="fas fa-lock"
+                                    style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="password" class="input" style="padding-left: 45px;" placeholder="••••••••">
+                            </div>
+                        </div>
+                        <div class="form-group"
+                            style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                            <input type="checkbox" id="terms">
+                            <label for="terms" style="font-size: 0.8rem; color: var(--text-main);">I agree to the <a
+                                    href="#" class="text-primary">Membership Terms</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; padding: 18px; font-size: 1rem; border-radius: 15px; margin-top: 10px;">Register</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="main.js"></script>
+    <script src="rtltoggle.js"></script>
+    <script>
+        const authCard = document.getElementById('auth-card');
+        const loginBtn = document.getElementById('toggle-login');
+        const registerBtn = document.getElementById('toggle-register');
+
+        loginBtn.addEventListener('click', () => {
+            authCard.classList.remove('mode-register');
+            loginBtn.classList.add('active');
+            registerBtn.classList.remove('active');
+        });
+
+        registerBtn.addEventListener('click', () => {
+            authCard.classList.add('mode-register');
+            registerBtn.classList.add('active');
+            loginBtn.classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>
